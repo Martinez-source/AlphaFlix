@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AlphaFlix - Home</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="icon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+       <a href="#"><div class="logo" id="home">Alpha<span>Flix</span></div></a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav>
+            <a href="#" class="nav-link" id="home-link">Home</a>
+            <a href="#" class="nav-link" id="movies-link">Movies</a>
+            <a href="#" class="nav-link" id="tvseries-link">TV Series</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link" id="genre-link">Genres</a>
+                <div class="dropdown-content" id="genre-dropdown"></div>
+            </div>
+        </nav>
+        <div class="search-profile">
+            <input type="text" id="search-input" placeholder="Search..." />
+            <div class="profile-wrapper">
+                <a href="profile.html">
+                    <img src="images/Electrode.jpg" alt="Profile" class="profile-icon" id="profile-icon" />
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="banner-section">
+        <section class="banner-carousel" id="banner-carousel">
+            <button class="banner-arrow left" id="banner-prev">&#10094;</button>
+            <div class="banner-wrapper" id="banner-wrapper"></div>
+            <button class="banner-arrow right" id="banner-next">&#10095;</button>
+        </section>
+    </section>
+
+    <main id="main">
+        <section class="section"><h2>Trending Now </h2><div class="movie-row" id="trending-now-container"></div></section>
+        <section class="section"><h2>Top Picks</h2><div class="movie-row" id="top-picks-container"></div></section>
+        <section class="section"><h2>Science Fiction</h2><div class="movie-row" id="science-fiction-container"></div></section>
+        <section class="section"><h2>Action</h2><div class="movie-row" id="action-container"></div></section>
+        <section class="section"><h2>Fantasy</h2><div class="movie-row" id="fantasy-container"></div></section>
+        <section class="section"><h2>Emotional</h2><div class="movie-row" id="emotional-container"></div></section>
+        <section class="section"><h2>African Base</h2><div class="movie-row" id="african-base-container"></div></section>
+        <section class="section"><h2>Others</h2><div class="movie-row" id="others"></div></section>
+
+<section id="search-results-section" class="section hidden">
+    <div class="movie-row" id="search-results-grid"></div>
+</section>
+</main>
+
+    <section id="movie-detail" class="hidden">
+        <button id="back-to-home" class="back-button">&larr; Back to Movies</button>
+        <div class="detail-flex">
+            <div id="season-container" class="episode-list"></div>
+            <div class="video-player-wrapper">
+                <h2 id="detail-title" class="movie-title"></h2>
+                <iframe id="movie-video-player" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                <p id="detail-description" class="movie-description"></p>
+                <div id="comment-section">
+                    <h3>Comments</h3>
+                    <input type="text" id="comment-name" placeholder="Your name (optional)" />
+                    <textarea id="comment-input" placeholder="Write a comment..."></textarea>
+                    <button id="submit-comment">Post Comment</button>
+                    <div id="comments-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 AlphaFlix. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('mobile-active');
+        }
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZtWpk5mgP-2vMKd-kHNCFHnG_mBiuggo",
+            authDomain: "alphaflix-8acde.firebaseapp.com",
+            databaseURL: "https://alphaflix-8acde-default-rtdb.firebaseio.com",
+            projectId: "alphaflix-8acde",
+            storageBucket: "alphaflix-8acde.appspot.com",
+            messagingSenderId: "47323052340",
+            appId: "1:47323052340:web:ff4c2791fa011fd7150d61"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+    </script>
+
+    <script defer src="script.js"></script>
+</body>
+</html>

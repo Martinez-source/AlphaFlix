@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Profile - AlphaFlix</title>
+  <style>
+    body {
+      background: #0f0f0f;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px red;
+    }
+
+    h2 {
+      color: red;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #222;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .avatars {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin: 5px;
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .avatar.selected {
+      border-color: red;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: red;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      display: block;
+      text-align: center;
+      color: red;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Edit Profile</h2>
+    <input type="text" id="display-name" placeholder="New Display Name" />
+
+    <p style="margin-top: 20px;">Choose Avatar Profile Picture:</p>
+    <div class="avatars" id="avatar-container">
+      <img src="avatars/Electrode.jpg" class="avatar" data-url="images/avatars/avatar1.png" />
+      <img src="avatars/cobra.jpg" class="avatar" data-url="images/avatars/avatar2.png" />
+      <img src="avatars/avatar3.png" class="avatar" data-url="images/avatars/avatar3.png" />
+      <img src="avatars/avatar4.png" class="avatar" data-url="images/avatars/avatar4.png" />
+      <img src="avatars/avatar5.png" class="avatar" data-url="images/avatars/avatar4.png" />
+      <img src="avatars/avatar6.png" class="avatar" data-url="images/avatars/avatar4.png" />
+      <img src="avatars/avatar7.png" class="avatar" data-url="images/avatars/avatar4.png" />
+      <img src="avatars/avatar8.png" class="avatar" data-url="images/avatars/avatar4.png" />
+      <img src="avatars/avatar9.png" class="avatar" data-url="images/avatars/avatar4.png" />
+    </div>
+
+    <button id="save-btn">Save Changes</button>
+    <a href="profile.html" class="back-btn">← Back to Profile</a>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <!-- Firebase Config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDZtWpk5mgP-2vMKd-kHNCFHnG_mBiuggo",
+      authDomain: "alphaflix-8acde.firebaseapp.com",
+      projectId: "alphaflix-8acde",
+      storageBucket: "alphaflix-8acde.appspot.com",
+      messagingSenderId: "47323052340",
+      appId: "1:47323052340:web:ff4c2791fa011fd7150d61"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+  </script>
+
+  <!-- Avatar Logic -->
+  <script>
+    let selectedAvatar = null;
+
+    const avatars = document.querySelectorAll('.avatar');
+    avatars.forEach(avatar => {
+      avatar.addEventListener('click', () => {
+        avatars.forEach(a => a.classList.remove('selected'));
+        avatar.classList.add('selected');
+        selectedAvatar = avatar.getAttribute('data-url');
+      });
+    });
+
+    document.getElementById('save-btn').addEventListener('click', () => {
+      const name = document.getElementById('display-name').value;
+      const user = auth.currentUser;
+
+      if (!user) return alert("You're not logged in!");
+
+      user.updateProfile({
+        displayName: name || user.displayName,
+        photoURL: selectedAvatar || user.photoURL
+      }).then(() => {
+        alert('Profile updated successfully!');
+        window.location.href = "profile.html";
+      }).catch(err => {
+        alert('Error: ' + err.message);
+      });
+    });
+  </script>
+
+</body>
+</html>

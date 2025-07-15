@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaFlix - Your Ultimate Entertainment</title>
+    <link rel="icon" type="image/png" href="icon.png" />
+    <style>
+        /* General Body & Container */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            background-color: #141414; 
+            color: #e5e5e5; 
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header (Minimal for Landing Page Demo) */
+        header {
+            background-color: #000;
+            padding: 4px 0;
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: center; /* Center the title for this standalone demo */
+            align-items: center;
+        }
+
+        header h1 {
+            color: #e50914; /* red */
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: bold;
+            /* No cursor: pointer here as it doesn't lead anywhere in this standalone file */
+        }
+
+        /* ==================== Landing Page Styles ==================== */
+        #landing-page {
+            min-height: calc(100vh - 100px); /* Adjust based on header/footer height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(website/marvel\ and\ dc.jpeg);
+            /* IMPORTANT: Replace the placeholder URL above with a real, high-quality background image URL */
+            background-attachment: fixed; /* Makes background scroll with page less */
+        }
+
+        .landing-content {
+            max-width: 900px;
+           /* background-color: rgba(0, 0, 0, 0.75);*/ 
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .landing-hero h1 {
+            font-size: 4em;
+            color: #e50914;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .landing-hero p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        .landing-info {
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .landing-info h2 {
+            font-size: 2.2em;
+            color: #e5e5e5;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e50914;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .landing-info p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: #bbb;
+        }
+
+        .landing-info ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .landing-info ul li {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        .landing-info ul li::before {
+            content: "✔️"; /* Checkmark icon */
+            margin-right: 10px;
+            color: #e50914;
+        }
+
+        .cta-button {
+            background-color: #e50914;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.3em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            background-color: #f40612;
+            transform: scale(1.05);
+        }
+
+        .call-to-action {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+
+        .call-to-action h2 {
+            font-size: 2.5em;
+            color: #e50914;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            color: #bbb;
+            text-align: center;
+            padding: 4px 0;
+            border-top: 1px solid #222;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .landing-hero h1 {
+                font-size: 3em;
+            }
+
+            .landing-hero p {
+                font-size: 1.2em;
+            }
+
+            .landing-info h2 {
+                font-size: 1.8em;
+            }
+
+            .landing-info p, .landing-info ul li {
+                font-size: 1em;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .landing-hero h1 {
+                font-size: 2.5em;
+            }
+
+            .landing-hero p {
+                font-size: 1em;
+            }
+
+            .landing-content {
+                padding: 20px;
+            }
+            .landing-info h2 {
+                font-size: 1.5em;
+            }
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>AlphaFlix</h1>
+        </div>
+    </header>
+
+    <section id="landing-page">
+        <form action="sign-in.html" method="get">
+        <div class="landing-content">
+            <div class="landing-hero">
+                <h1>Welcome to AlphaFlix</h1>
+                <p>Your ultimate destination for movies, series, and more. Dive into a world of endless entertainment!</p>
+                <button id="get-started-button" class="cta-button">Sign In</button>
+            </div>
+            </form>
+
+            <div class="landing-info">
+                <h2>What is AlphaFlix?</h2>
+                <p>AlphaFlix is a premium streaming service offering a vast library of films and TV shows across all genres. Enjoy ad-free viewing, exclusive content, and high-quality streaming on any device.</p>
+                
+                <h2>Features You'll Love:</h2>
+                <ul>
+                    <li>✅ Unlimited movies and TV shows</li>
+                    <li>✅ Watch anywhere, anytime</li>
+                    <li>✅ Personalized recommendations</li>
+                    <li>✅ HD streaming available</li>
+                    <li>✅ New content added weekly</li>
+                </ul>
+                
+                <p>Join the AlphaFlix family today and start your journey of endless entertainment!</p>
+            </div>
+            <form action="sign-in.html" method="get">
+            <div class="call-to-action" action="index3.html" method="get">
+                <h2>Ready to Watch?</h2>
+                <button class="cta-button" id="join-now-button" >Join Now</button>
+        </div>
+        </form>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 AlphaFlix. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

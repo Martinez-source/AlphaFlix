@@ -1,0 +1,683 @@
+/* --- GLOBAL --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #0a0a0a;
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+}
+
+/* === HEADER === */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #111;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.logo span {
+    color: goldenrod;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: goldenrod;
+}
+
+/* === DROPDOWN === */
+.dropdown {
+   /* position: relative;*/
+   display: none;
+}
+
+/* === SEARCH + PROFILE === */
+.search-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#search-input {
+    padding: 8px;
+    border: none;
+    border-radius: 18px;
+    outline: none;
+    background-color: #444;
+    color: white;
+}
+
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+/* === BANNER === */
+#banner-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-carousel {
+    position: relative;
+    height: 60vh;
+}
+
+.banner-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.banner-slide {
+    display: none;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+}
+
+.banner-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-overlay,
+.banner-content {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    color: #fff;
+    max-width: 600px;
+
+    /* MODIFIED: Border and padding for the text container */
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px  rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    padding: 8px 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.banner-overlay h2,
+.banner-content h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.banner-overlay p,
+.banner-content p {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.banner-overlay button,
+.banner-content button {
+    background: goldenrod;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.banner-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute; /* Crucial: make it positionable over the background image */
+    top: 0;
+    left: 0;
+    opacity: 0; /* Initially hide the video */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for video appearance */
+}
+
+.banner-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+}
+
+.banner-arrow.left {
+    left: 10px;
+}
+
+.banner-arrow.right {
+    right: 10px;
+}
+
+/* === SECTIONS === */
+.section {
+    padding: 10px 20px;
+    padding-bottom: 3px;
+}
+
+/* Apply a top margin to sections that are not the first of their type,
+   effectively reducing the space between consecutive sections (movie rows) */
+.section + .section {
+    margin-top: -10px;
+}
+
+.section h2 {
+    font-size: 22px;
+    color: goldenrod;
+    margin-bottom: 5px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.movie-row {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+
+    /* === HIDE SCROLLBARS === */
+    &::-webkit-scrollbar {
+        display: none;
+        height: 0;
+    }
+    scrollbar-width: none;
+    /* === END HIDE SCROLLBARS === */
+}
+
+/* --- MOVIE CARD STYLES (MODIFIED FOR ALPHALIX LOOK) --- */
+.movie-card {
+    flex: 0 0 auto;
+    width: 170px;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, z-index 0s 0.3s, box-shadow 0.3s ease-in-out;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 1;
+    border: 2px solid rgba(9, 9, 9, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card:hover {
+    transform: scale(1.08);
+    z-index: 10;
+    border: 2px solid transparent;
+    box-shadow: 0 0 15px 5px goldenrod,
+                0 0 0 2px goldenrod;
+}
+
+.movie-card img {
+    border-radius: 0;
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: none;
+    object-fit: cover;
+}
+
+/* Redefining rating for the second image's look */
+.rating {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgb(196, 141, 4);
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.rating::before {
+    content: '⭐';
+    font-size: 12px;
+}
+
+/* New class for release date/status text */
+.movie-status {
+    position: absolute;
+    top: 36px;
+    right: 8px;
+    background-color: #333;
+    color: #ccc;
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+/* HIDE THE MOVIE TITLE */
+.movie-card-title {
+    display: none;
+}
+
+/* .card-body is no longer directly relevant to the new card structure */
+.card-body {
+    display: none;
+}
+
+/* --- END MOVIE CARD STYLES --- */
+
+/* --- FILTERED RESULTS CONTAINER (New) --- */
+#filtered-results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Adjust card size here */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+    margin-top: 20px;
+}
+
+
+/* === MOVIE DETAIL === */
+#movie-detail {
+    padding: 20px;
+    background: #111;
+}
+
+.hidden {
+    display: none;
+}
+
+.video-player-wrapper {
+    max-width: 100%;
+}
+
+.video-player-wrapper iframe,
+.video-player-wrapper video { /* Added video for direct playback */
+    width: 100%;
+    height: 60vh;
+    border-radius: 8px;
+    background-color: #000; /* Fallback for empty video */
+}
+
+.movie-title {
+    font-size: 26px;
+    margin-top: 10px;
+    color: goldenrod;
+}
+
+.movie-description {
+    font-size: 16px;
+    margin-top: 8px;
+    line-height: 1.5; /* Improve readability */
+    color: #ccc;
+}
+
+/* --- EPISODES (Revamped Styles) --- */
+
+#season-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #1a1a1a; /* Slightly lighter background than detail section */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.season-buttons-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap to next line */
+    gap: 10px; /* Space between season buttons */
+    margin-bottom: 15px; /* Space between season buttons and episode grid */
+    border-bottom: 1px solid #333; /* Separator line */
+    padding-bottom: 15px;
+}
+
+.season-btn {
+    padding: 10px 18px;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 20px; /* More rounded pill shape */
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.0em;
+    transition: all 0.3s ease;
+    min-width: 60px; /* Ensure a minimum width */
+    text-align: center;
+}
+
+.season-btn:hover {
+    background-color: #444;
+    border-color: goldenrod;
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.season-btn.active {
+    background-color: goldenrod;
+    border-color: goldenrod;
+    box-shadow: 0 0 8px goldenrod;
+}
+
+.episode-buttons-overall-wrapper {
+    /* This div wraps all episode grids. No specific styling needed unless you want a border around the whole episode area */
+}
+
+.episode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* Adjust column size for episodes */
+    gap: 10px; /* Space between episode boxes */
+    padding: 10px 0; /* Add vertical padding */
+}
+
+.episode-box-btn {
+    width: 60px; /* Fixed width for a square-like button */
+    height: 60px; /* Fixed height for a square-like button */
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 8px; /* Slightly rounded corners */
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.episode-box-btn:hover {
+    background-color: #333;
+    border-color: goldenrod;
+    transform: translateY(-2px);
+    box-shadow: 0 0 5px goldenrod;
+}
+
+.episode-box-btn.active {
+    background-color: goldenrod;
+    border-color: goldenrod;
+    box-shadow: 0 0 8px goldenrod;
+    transform: scale(1.05); /* Slightly enlarge active episode */
+}
+
+/* === COMMENT SECTION === */
+#comment-section {
+    margin-top: 30px;
+}
+
+#comment-input,
+#comment-name {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+#submit-comment {
+    padding: 10px 20px;
+    background: goldenrod;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+#submit-comment:hover {
+    background: goldenrod; /* Darker red on hover */
+}
+
+.comment {
+    background: #1c1c1c;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: goldenrod;
+    margin-bottom: 4px;
+}
+
+.comment-text {
+    margin-bottom: 4px;
+}
+
+.comment-time {
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* === BACK BUTTON === */
+.back-button {
+    margin-bottom: 20px;
+    background: #222;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.back-button:hover {
+    background: #333;
+}
+
+/* === FOOTER === */
+footer {
+    background-color: #111;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* === MOBILE RESPONSIVE === */
+@media screen and (max-width: 768px) {
+    header {
+        flex-wrap: nowrap;
+        padding: 8px 10px;
+    }
+
+    .logo {
+        font-size: 18px;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+    .nav-link {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .search-profile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    #search-input {
+        width: 80px;
+        padding: 4px 6px;
+        font-size: 12px;
+    }
+    #search-input:hover {
+        width: 100px;
+    }
+
+    .profile-icon {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+    }
+
+    .banner-carousel {
+        height: 30vh;
+    }
+
+    .banner-overlay,
+.banner-content {
+    display: block;
+    font-size: 6px;
+    max-width: 60%;
+    padding: 3px 3px;
+}
+
+.banner-overlay h2,
+.banner-content h2 {
+    font-size: 4px;
+    margin-bottom: 3px;
+}
+
+.banner-overlay p,
+.banner-content p {
+    font-size: 8px;
+    margin-bottom: 8px;
+}
+
+.banner-overlay button,
+.banner-content button {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+    .movie-card {
+        width: 120px;
+    }
+
+    .banner-overlay h2,
+    .banner-content h2 {
+        font-size: 10px;
+    }
+    .movie-row {
+        gap: 0.5px;
+    }
+
+    .movie-section {
+      /*  padding: 0 5px;*/
+        padding-bottom: 1px;
+    }
+
+    .movie-card {
+        width: 100px;
+        margin-right: 10px;
+        height: 150px;
+    }
+    .rating {
+        display: none;
+    }
+
+    .movie-card img {
+        height: 210px;
+    }
+    .movie-status {
+        display: none;
+    }
+
+    #movie-detail h1 {
+        font-size: 2em;
+    }
+
+    #movie-detail p {
+        font-size: 1em;
+    }
+
+    /* --- MOBILE-SPECIFIC STYLES FOR SEASON AND EPISODE BUTTONS --- */
+    #season-container {
+        padding: 10px; /* Slightly more padding than original mobile */
+        margin-bottom: 10px;
+    }
+
+    .season-buttons-wrapper {
+        gap: 8px; /* Slightly more space for better tapping */
+        margin-bottom: 10px;
+        justify-content: flex-start; /* Align left on mobile */
+        overflow-x: auto; /* Enable horizontal scrolling for many seasons */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .season-buttons-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .season-btn {
+        padding: 8px 14px; /* Slightly larger touch target */
+        font-size: 0.8em;
+        min-width: 50px; /* Allow buttons to shrink a bit more */
+        flex-shrink: 0; /* Prevent buttons from shrinking too much */
+    }
+
+    .episode-grid {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); /* Larger touch targets */
+        gap: 8px; /* More spacing */
+        margin-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .episode-box-btn {
+        width: 45px; /* Larger touch target */
+        height: 45px;
+        font-size: 0.9em; /* Slightly larger font */
+        border-radius: 10px; /* Slightly less rounded for better fit */
+    }
+}
+
+.menu-toggle {
+    display: none;
+}
